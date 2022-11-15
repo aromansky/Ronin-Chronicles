@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: dde16a4e578ec30428c9be84b9927a0a
+guid: 1ac7604fa10432d49aa7f6ee232ffb76
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
+  - first:
+      74: -5217031911501987157
+    second: Armature|Attak.001
   - first:
       74: -8945691123924629249
     second: Armature|Idle
@@ -95,7 +98,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: LowerBody
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -103,7 +106,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
