@@ -128,6 +128,7 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 --- !u!4 &281082194 stripped
 Transform:
+  m_CorrespondingSourceObject: {fileID: -1395834050081586107, guid: d0af08c80a47cfc4b94c6fd17b7d7701,
     type: 3}
   m_PrefabInstance: {fileID: 1355393006}
   m_PrefabAsset: {fileID: 0}
