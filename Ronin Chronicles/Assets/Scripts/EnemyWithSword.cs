@@ -1,34 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyWithSword : MonoBehaviour
 {
     public int health; // здоровье персонажа
-    public int time_to_destruction; // время до исчезновения после смерти
+    public int timeToDestruction; // время до исчезновения после смерти
     public float speed; // скорость пермещения персонажа 
-    public float distance; // расстояние, на котором персонаж будет держатся от игрока
-    public float vision_length; // расстояние, на которое может смотреть
+    public float turningSpeed; // скорость поворота персонажа 
+    public float targetDistance; // расстояние, на котором персонаж будет держатся от игрока
+    public float visionLength; // расстояние, на которое может смотреть
     public GameObject target;
+    const float eps = 0.1f;
 
-    // перемещение персонажа
-    void Moving(Vector3 character_position, Vector3 target_position)
+    
+    void Moving(Transform character, Transform target) // перемещение персонажа
     {
-        float angle = Vector3.Angle(character_position, target_position);
+        // поворот в сторону цели
+        Vector3 direction = (target.position - character.position).normalized;
+        Quaternion LookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, LookRotation, Time.deltaTime * turningSpeed);
 
-        if (Vector3.Distance(target_position, character_position) <= vision_length && Vector3.Distance(target_position, character_position) >= distance) // Проверка расстояния до игрока 
+        if (Vector3.Distance(target.position, character.position) <= visionLength && Vector3.Distance(target.position, character.position) > targetDistance) // Проверка расстояния до игрока 
         {
-            transform.position = Vector3.MoveTowards(character_position, target_position, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(character.position, target.position, Time.deltaTime * speed);
+        }
+        if (Vector3.Distance(target.position, character.position) < targetDistance - eps)
+        {
+            // держится всегда перед "лицом" игрока, находясь на заданной дистанции
+            float angle = target.eulerAngles.y * (float) Math.PI/180;
+            Vector3 backStep = new Vector3(target.position.x + targetDistance * (float)Math.Sin(angle), 0f, target.position.z + targetDistance * (float)Math.Cos(angle));
+            transform.position = Vector3.MoveTowards(character.position, backStep, Time.deltaTime * speed);
+            
+        }
+        
 
-            // надо сделать поворот к цели
-        }
-        else if (Vector3.Distance(target_position, character_position) >= distance)
-        {
-            //надо сделать, чтобы он держал это расстояние
-        }
-    }
+    }    
 
     void Start()
     {
@@ -40,12 +46,13 @@ public class EnemyWithSword : MonoBehaviour
         // Проверка уровня здоровья
         if (health <= 0)
         {
-            Transform.Destroy(gameObject, time_to_destruction);
+            Transform.Destroy(gameObject, timeToDestruction);
         }
 
-
-        Moving(gameObject.transform.position, target.transform.position);
-
+        if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
+        {
+            Moving(gameObject.transform, target.transform);
+        }
     }
 
 
