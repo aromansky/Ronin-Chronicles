@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 
-public class EnemyWithSword : MonoBehaviour
+public class EnemyMoving : MonoBehaviour
 {
-    public int health; // здоровье персонажа
-    public int timeToDestruction; // время до исчезновения после смерти
     public float speed; // скорость пермещения персонажа 
     public float turningSpeed; // скорость поворота персонажа 
     public float targetDistance; // расстояние, на котором персонаж будет держатся от игрока
@@ -34,21 +32,18 @@ public class EnemyWithSword : MonoBehaviour
         }
         
 
-    }    
+    }
 
     void Start()
     {
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body != null)
+            body.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Проверка уровня здоровья
-        if (health <= 0)
-        {
-            Transform.Destroy(gameObject, timeToDestruction);
-        }
-
         if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
         {
             Moving(gameObject.transform, target.transform);
