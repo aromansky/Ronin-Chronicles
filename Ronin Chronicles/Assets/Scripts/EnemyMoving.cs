@@ -10,6 +10,8 @@ public class EnemyMoving : MonoBehaviour
     public GameObject target;
     const float eps = 0.1f;
 
+    private float _health;
+
     
     void Moving(Transform character, Transform target) // перемещение персонажа
     {
@@ -39,14 +41,16 @@ public class EnemyMoving : MonoBehaviour
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null)
             body.freezeRotation = true;
+        _health = gameObject.GetComponent<HealthScript>().health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
+        if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength && _health != 0)
         {
             Moving(gameObject.transform, target.transform);
+            Debug.Log(_health);
         }
     }
 
