@@ -8,8 +8,11 @@ public class HealthScript : MonoBehaviour
     private bool EnemyDied;
     public bool Is_Player;
 
+    private Animator _animator;
+
     public void ApplyDamage(float damage)
     {
+        _animator = GetComponent<Animator>();
         if (EnemyDied)
             return;
 
@@ -18,6 +21,10 @@ public class HealthScript : MonoBehaviour
         //print("Enemy Health = " + health);
 
         if (health <= 0f)
+        {
             EnemyDied = true;
+            _animator.SetBool("Dead", true);
+        }
+            
     }
 }

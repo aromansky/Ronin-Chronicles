@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
     
     void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             CurrentComboState++;
             ResetTime = true;
@@ -42,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
             if(CurrentComboState == ComboState.Attack_1)
                 _animator.SetBool("Attack_1", true);
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
             _animator.SetBool("Attack_1", false);
     }
 
