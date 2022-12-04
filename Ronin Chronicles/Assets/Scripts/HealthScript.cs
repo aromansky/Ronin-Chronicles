@@ -13,7 +13,7 @@ public class HealthScript : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         _animator = GetComponent<Animator>();
-        if (EnemyDied)
+         if (EnemyDied)
             return;
 
         health -= damage;
@@ -22,7 +22,7 @@ public class HealthScript : MonoBehaviour
 
         if (health <= 0f)
         {
-            EnemyDied = true;
+            //EnemyDied = true;
             _animator.SetBool("Dead", true);
         }
             
