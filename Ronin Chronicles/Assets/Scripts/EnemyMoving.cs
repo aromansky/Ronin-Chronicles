@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMoving : MonoBehaviour
@@ -8,6 +9,8 @@ public class EnemyMoving : MonoBehaviour
     public float targetDistance; 
     public float visionLength; 
     public GameObject target;
+
+    private EnemyHealth obj;
     const float eps = 0.1f;
 
     private Animator _animator;
@@ -20,7 +23,7 @@ public class EnemyMoving : MonoBehaviour
         Quaternion LookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, LookRotation, Time.deltaTime * turningSpeed);
 
-        if (Vector3.Distance(target.position, character.position) <= visionLength && Vector3.Distance(target.position, character.position) > targetDistance) // �������� ���������� �� ������ 
+        if (Vector3.Distance(target.position, character.position) <= visionLength && Vector3.Distance(target.position, character.position) > targetDistance)
         {
             transform.position = Vector3.MoveTowards(character.position, target.position, Time.deltaTime * speed);
         }
@@ -42,18 +45,20 @@ public class EnemyMoving : MonoBehaviour
         if (body != null)
             body.freezeRotation = true;
         _animator = GetComponent<Animator>();
+
+        obj = GetComponent<EnemyHealth>();
     }
 
     void Update()
     {
-        if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
-        {
-            Moving(gameObject.transform, target.transform);
-            _animator.SetBool("Move", true);
-        }
-        else
-            _animator.SetBool("Move", false);
+        if(obj.HP > 0)
+            if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
+            {
+                Moving(gameObject.transform, target.transform);
+                _animator.Play("Walk");
+            }
+            else
+                _animator.Play("Idle");
+        Debug.Log(obj.HP + "df");
     }
-
-
 }
