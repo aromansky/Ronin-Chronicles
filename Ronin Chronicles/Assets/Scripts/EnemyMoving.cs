@@ -59,6 +59,5 @@ public class EnemyMoving : MonoBehaviour
             }
             else
                 _animator.Play("Idle");
-        Debug.Log(obj.HP + "df");
     }
 }
