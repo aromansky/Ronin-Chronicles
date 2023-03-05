@@ -1,28 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public LayerMask collisionLayer;
-    public float radius = 0.05f;
-    public float damage = 2f;
+    private Animator _anim;
+    private Collider _col;
+    public bool hit = false;
 
-    public bool is_Player, is_Enemy;
+    void Start()
+    {
+       _anim = GetComponent<Animator>();
+        _col = GameObject.FindGameObjectsWithTag("Katana").First().GetComponent<Collider>();
+    }
 
     void Update()
     {
-        DetectCollision();
+        if (Input.GetMouseButton(0) && !hit)
+            _anim.Play("Attack_1");
     }
 
-    void DetectCollision()
+    public void Hit()
     {
-        Collider[] hit = Physics.OverlapSphere(transform.position, radius, collisionLayer);
-
-        if(hit.Length > 0)
-        {
-            hit[0].GetComponent<HealthScript>().ApplyDamage(damage);
-            gameObject.SetActive(false);
-        }
+        hit = !hit;
+        _col.enabled = true;
     }
+        
+
+    public void DisableCollider() =>
+        _col.enabled = false;
 }
