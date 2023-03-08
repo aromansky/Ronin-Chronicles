@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyMoving : MonoBehaviour
 {
-    public float speed;
-    public float turningSpeed;
-    public float targetDistance; 
-    public float visionLength; 
-    public GameObject target;
+    private float speed;
+    private float turningSpeed;
+    private float targetDistance;
+    private float visionLength;
+    private GameObject target;
 
-    private EnemyHealth obj;
+    private EnemyCharacteristics _characteristics;
     const float eps = 0.1f;
 
     private Animator _animator;
@@ -46,12 +46,18 @@ public class EnemyMoving : MonoBehaviour
             body.freezeRotation = true;
         _animator = GetComponent<Animator>();
 
-        obj = GetComponent<EnemyHealth>();
+
+        speed = GetComponent<EnemyCharacteristics>().speed;
+        turningSpeed = GetComponent<EnemyCharacteristics>().turningSpeed;
+        targetDistance = GetComponent<EnemyCharacteristics>().targetDistance;
+        visionLength = GetComponent<EnemyCharacteristics>().visionLength;
+        target = GetComponent<EnemyCharacteristics>().target;
+        _characteristics = GetComponent<EnemyCharacteristics>();
     }
 
     void Update()
     {
-        if(obj.HP > 0)
+        if(_characteristics.HP > 0)
             if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
             {
                 Moving(gameObject.transform, target.transform);
