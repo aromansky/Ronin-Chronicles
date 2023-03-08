@@ -18,8 +18,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.gameObject.tag == "Katana" && _at.hit)
         {
-            HP -= katana.Damage;
             _at.DisableCollider();
+            HP -= katana.Damage;
             if (HP <= 0)
             {
                 anim.Play("Death_002");
