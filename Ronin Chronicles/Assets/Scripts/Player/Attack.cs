@@ -4,14 +4,12 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     private Animator _anim;
-    private Collider _col;
     private PlayerCharacteristics _characteristics;
     public bool hit = false;
 
     void Start()
     {
        _anim = GetComponent<Animator>();
-        _col = GameObject.FindGameObjectsWithTag("Katana").First().GetComponent<Collider>();
         _characteristics = GetComponent<PlayerCharacteristics>();
     }
 
@@ -21,13 +19,9 @@ public class Attack : MonoBehaviour
             _anim.Play("Attack_1");
     }
 
-    public void Hit()
-    {
+    public void Hit() =>
         hit = !hit;
-        _col.enabled = true;
-    }
-        
 
-    public void DisableCollider() =>
-        _col.enabled = false;
+
+
 }

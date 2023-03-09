@@ -9,8 +9,7 @@ public class EnemyCharacteristics : MonoBehaviour
     public float targetDistance;
     public float visionLength;
     public GameObject target;
-    public int HP;
+    public float HP;
+    public float MaxHP;
     public KatanaDamage katana;
-    private Animator anim;
-    private Attack _at;
 }

@@ -17,19 +17,20 @@ public class EnemyHealth : MonoBehaviour
         _at = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Attack>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.tag == "Katana" && _at.hit && _characteristics.HP > 0)
+        if (collider.gameObject.tag == "Katana" && _at.hit && _characteristics.HP > 0)
         {
-            _at.DisableCollider();
             _characteristics.HP -= katana.Damage;
             if (_characteristics.HP <= 0)
-            {
                 anim.Play("Death_002");
-                gameObject.GetComponent<Rigidbody>().useGravity = false;
-                gameObject.GetComponent<Collider>().enabled = false;
-            }
                 
         }   
+    }
+
+    public void DisableColliderAndUseGravity()
+    {
+        GetComponent<Collider>().enabled = false;
+        GetComponent<Rigidbody>().useGravity = false;
     }
 }
