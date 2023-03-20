@@ -9,4 +9,8 @@ public class PlayerCharacteristics : MonoBehaviour
     public float gravity;
     public float HP;
     public float MaxHP;
+    public float Range;
+    public float AbsorbLifeDamage;
+    public float AbsorbLifeCoeff;
+    public float AbsorbLifeCd;
 }
