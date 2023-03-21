@@ -9,10 +9,13 @@ public class PlayerAbsorbLifeCooldown : MonoBehaviour
     void Update()
     {
         var _ch = Camera.main.GetComponent<AbsorbLife>();
-        if (!_ch.cooldown || _ch.flag)
+        if (!_ch.cooldown)
             image.color = Color.gray;
         else
             image.color = Color.white;
+
+        if (_ch.absorb)
+            image.color = Color.red;
 
     }
 }
