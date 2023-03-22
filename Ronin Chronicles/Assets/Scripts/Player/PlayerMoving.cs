@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
 {
-    private float speed;
-    private float speedMultiplier;
+    [Tooltip("Скорость персонажа в данный момент (м/с)")]
+    public float currentSpeed = 0f; // Теперь эта переменная отвечает за текущую скорость
+
+    private float moveSpeed;    // Скорость ходьбы всегда храниться в отдельной переменной, а не перевычисляется
+    private float runSpeed;     // Заменил множитель на скорость бега
     private float gravity;
     private PlayerCharacteristics _characteristics;
     private CharacterController _charController;
@@ -11,8 +14,8 @@ public class PlayerMoving : MonoBehaviour
 
     private void Start()
     {
-        speed = GetComponent<PlayerCharacteristics>().speed;
-        speedMultiplier = GetComponent<PlayerCharacteristics>().speedMultiplier;
+        moveSpeed = GetComponent<PlayerCharacteristics>().moveSpeed;
+        runSpeed = GetComponent<PlayerCharacteristics>().runSpeed;
         gravity = GetComponent<PlayerCharacteristics>().gravity;
         _characteristics = GetComponent<PlayerCharacteristics>();
         _charController = GetComponent<CharacterController>();
@@ -25,36 +28,37 @@ public class PlayerMoving : MonoBehaviour
     {
         if (_characteristics.HP > 0)
         {
-            float deltaX = Input.GetAxis("Horizontal") * speed;
-            float deltaZ = Input.GetAxis("Vertical") * speed;
+            // Я мог накосячить с векотором movement, так как запутался, где какая скорость должна быть
+            float deltaX = Input.GetAxis("Horizontal");
+            float deltaZ = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(deltaX, gravity, deltaZ);
-            movement = Vector3.ClampMagnitude(movement, speed);
+            Vector3 movement = new Vector3(deltaX * currentSpeed, gravity, deltaZ * currentSpeed);
+            movement = Vector3.ClampMagnitude(movement, currentSpeed);
 
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement);
             _charController.Move(movement);
-
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            
+            // TODO 1: Заменить волшебное число 0.1f на какую-нибудь переменную "отклонение скорости" или типа того
+            // TODO 2: Инерцию персонажа. То есть от ходьбы к бегу скорость меняется за несколько тактов и наоборот.
+            if ((Mathf.Abs(deltaX) < 0.1f) && (Mathf.Abs(deltaZ) < 0.1f))
             {
-                speed *= speedMultiplier;
-                _animator.SetBool("Run", true);
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                speed /= speedMultiplier;
-                _animator.SetBool("Run", false);
-            }
-
-            if (deltaX != 0 || deltaZ != 0)
-            {
-                _animator.SetBool("Move", true);
+                currentSpeed = 0;
             }
             else
             {
-                _animator.SetBool("Move", false);
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    currentSpeed = runSpeed;
+                }
+                else
+                {
+                    currentSpeed = moveSpeed;
+                }
             }
+
+            // Теперь анимации idle / walk / run сами переключаются в зависимости от параметра Speed
+            _animator.SetFloat("Speed", currentSpeed);
         }
 
     }
