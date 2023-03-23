@@ -759,6 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5258189435d80ea4fb70a9bad0613371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSpeed: 0
 --- !u!95 &940332539
 Animator:
   serializedVersion: 4
@@ -804,8 +805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19314c13d4d4f7749a5450c9015ed034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  speedMultiplier: 1.5
+  moveSpeed: 10
+  runSpeed: 15
   gravity: 9.8
   HP: 100
   MaxHP: 100
