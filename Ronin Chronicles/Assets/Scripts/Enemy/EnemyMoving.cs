@@ -57,7 +57,7 @@ public class EnemyMoving : MonoBehaviour
 
     void Update()
     {
-        if(_characteristics.HP > 0)
+        if(!_characteristics.IsDead)
             if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
             {
                 Moving(gameObject.transform, target.transform);

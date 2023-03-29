@@ -4,10 +4,11 @@ public class PlayerMoving : MonoBehaviour
 {
     [Tooltip("Скорость персонажа в данный момент (м/с)")]
     public float currentSpeed = 0f; // Теперь эта переменная отвечает за текущую скорость
+    public float gravity; // Эта переменная отвечает за гравитацию
 
     private float moveSpeed;    // Скорость ходьбы всегда храниться в отдельной переменной, а не перевычисляется
     private float runSpeed;     // Заменил множитель на скорость бега
-    private float gravity;
+    
     private PlayerCharacteristics _characteristics;
     private CharacterController _charController;
     private Animator _animator;
@@ -32,8 +33,10 @@ public class PlayerMoving : MonoBehaviour
             float deltaX = Input.GetAxis("Horizontal");
             float deltaZ = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(deltaX * currentSpeed, gravity, deltaZ * currentSpeed);
+            Vector3 movement = new Vector3(deltaX * currentSpeed, 0, deltaZ * currentSpeed);
             movement = Vector3.ClampMagnitude(movement, currentSpeed);
+
+            movement.y = gravity;
 
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement);

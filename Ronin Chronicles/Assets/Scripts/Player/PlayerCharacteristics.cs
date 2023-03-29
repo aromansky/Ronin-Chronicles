@@ -8,6 +8,8 @@ public class PlayerCharacteristics : MonoBehaviour
     public float AbsorbLifeDamage;
     public float AbsorbLifeCoeff;
     public float AbsorbLifeCd;
+    public float KatanaDamage;
+    public float AttackCd;
     // �������� ��� ���������. ��� � � ���� �� ����� ������, � � ���������� ��� ���������
     // ����� �������� �������� Tooltip. � ��� ����� ��������� �� ���������
     [Header("��������������")]

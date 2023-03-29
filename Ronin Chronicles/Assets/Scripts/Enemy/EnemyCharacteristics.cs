@@ -11,6 +11,5 @@ public class EnemyCharacteristics : MonoBehaviour
     public GameObject target;
     public float HP;
     public float MaxHP;
-    public KatanaDamage katana;
     public bool IsDead = false;
 }
