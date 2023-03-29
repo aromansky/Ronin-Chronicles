@@ -15,16 +15,18 @@ public class AbsorbLife : MonoBehaviour
 
     public bool cooldown = true; // готовность способноти.
     public bool absorb;
-
+    private Animator anim;
+    private Attack _at;
 
     void Start()
     {
-
+        anim = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Animator>();
         cam = GetComponent<Camera>();
         rect = new Rect(0, 0, cam.pixelWidth, cam.pixelHeight);
         player = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<PlayerCharacteristics>();
 
         cnt_old = GameObject.FindGameObjectsWithTag("Enemy").Count();
+        _at = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Attack>();
     }
     void Update()
     {
@@ -33,26 +35,24 @@ public class AbsorbLife : MonoBehaviour
         {
             cooldown = !cooldown;
             Invoke("SetCoolDown", player.AbsorbLifeCd);
-
         }
 
         if (!Input.GetKey(KeyCode.Q))
-            absorb =  false;
+            absorb = false;
 
         if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0)
         {
             GameObject enemy = NearestEnemy();
             EnemyCharacteristics enemy_ch = enemy.GetComponent<EnemyCharacteristics>();
-   
-            var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
 
+            var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
 
             if (cnt_new != cnt_old && !Input.GetKey(KeyCode.Q))
                 cnt_old = cnt_new;
 
-            if (rect.Contains(cam.WorldToScreenPoint(GameObject.FindGameObjectsWithTag("Enemy").First().transform.position)) &&
-            Vector3.Distance(GameObject.FindGameObjectsWithTag("Enemy").First().transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range &&
-            Input.GetKey(KeyCode.Q) && !enemy_ch.IsDead)
+            if (rect.Contains(cam.WorldToScreenPoint(enemy.transform.position)) &&
+            Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range &&
+            Input.GetKey(KeyCode.Q) && !enemy_ch.IsDead && !_at.hit)
             {
                 if (cnt_new != cnt_old)
                 {
@@ -62,7 +62,11 @@ public class AbsorbLife : MonoBehaviour
 
 
                 if (!enemy_ch.IsDead && player.HP < player.MaxHP)
+                {
                     (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
+                    anim.Play("StealHealth");
+                }
+
             }
         }
     }
@@ -73,7 +77,7 @@ public class AbsorbLife : MonoBehaviour
     {
         var minDist = float.MaxValue;
         GameObject res = null;
-        foreach(var x in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             float dist = Vector3.Distance(x.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position);
             if (dist < minDist)
