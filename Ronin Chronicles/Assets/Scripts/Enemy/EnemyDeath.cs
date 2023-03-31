@@ -18,7 +18,7 @@ public class EnemyDeath : MonoBehaviour
         hp = GetComponent<EnemyCharacteristics>().HP;
         if (hp <= 0)
         {
-            //anim.Play("Death_002");
+            anim.Play("Death");
             gameObject.tag = "Untagged";
             GetComponent<EnemyCharacteristics>().IsDead = true;
         }

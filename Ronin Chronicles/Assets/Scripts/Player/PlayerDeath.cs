@@ -14,7 +14,10 @@ public class PlayerDeath : MonoBehaviour
     void Update()
     {
         if (_characteristics.HP <= 0)
+        {
             _anim.SetBool("Dead", true);
+        }
+            
 
     }
 }

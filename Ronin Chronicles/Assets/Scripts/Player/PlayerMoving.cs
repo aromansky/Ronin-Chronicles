@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMoving : MonoBehaviour
@@ -21,15 +22,16 @@ public class PlayerMoving : MonoBehaviour
         _characteristics = GetComponent<PlayerCharacteristics>();
         _charController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
-        
+
         gravity *= gravity < 0 ? 1 : -1;
     }
 
     void Update()
     {
-        if (_characteristics.HP > 0)
+        if (_characteristics.HP > 0 && !_animator.GetBool("Absorb"))
         {
             // Я мог накосячить с векотором movement, так как запутался, где какая скорость должна быть
+            // P.S Я починил. Советую перед выгрузкой всё протестить и удалить данный комментарий. Ещё я убрал ненужные {}
             float deltaX = Input.GetAxis("Horizontal");
             float deltaZ = Input.GetAxis("Vertical");
 
@@ -45,20 +47,12 @@ public class PlayerMoving : MonoBehaviour
             // TODO 1: Заменить волшебное число 0.1f на какую-нибудь переменную "отклонение скорости" или типа того
             // TODO 2: Инерцию персонажа. То есть от ходьбы к бегу скорость меняется за несколько тактов и наоборот.
             if ((Mathf.Abs(deltaX) < 0.1f) && (Mathf.Abs(deltaZ) < 0.1f))
-            {
                 currentSpeed = 0;
-            }
             else
-            {
                 if (Input.GetKey(KeyCode.LeftShift))
-                {
                     currentSpeed = runSpeed;
-                }
                 else
-                {
                     currentSpeed = moveSpeed;
-                }
-            }
 
             // Теперь анимации idle / walk / run сами переключаются в зависимости от параметра Speed
             _animator.SetFloat("Speed", currentSpeed);

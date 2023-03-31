@@ -14,7 +14,7 @@ public class MouseLookCam : MonoBehaviour
 
     public float sensitivityHor;
     public float sensitivityVert;
-    
+
     private PlayerCharacteristics _characteristics;
     public float minimumVert;
     public float maximumVert;
@@ -33,10 +33,9 @@ public class MouseLookCam : MonoBehaviour
     {
         if (_characteristics.HP <= 0)
             axes = RotationAxes.MouseXandY;
+
         if (axes == RotationAxes.MouseX)
-        {
             transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
-        }
 
         else if (axes == RotationAxes.MouseY)
         {

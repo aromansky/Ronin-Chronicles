@@ -3,23 +3,21 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    private Animator _anim;
-    private PlayerCharacteristics _characteristics;
+    private Animator anim;
+    private PlayerCharacteristics characteristics;
     public bool hit = false;
     private int attack_num = 1;
 
     void Start()
     {
-        _anim = GetComponent<Animator>();
-        _characteristics = GetComponent<PlayerCharacteristics>();
+        anim = GetComponent<Animator>();
+        characteristics = GetComponent<PlayerCharacteristics>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && !hit && _characteristics.HP > 0)
-        {
-            _anim.Play($"LightAttack_00{attack_num}");
-        }
+        if (Input.GetMouseButtonDown(0) && !hit && characteristics.HP > 0 && !anim.GetBool("Absorb"))
+            anim.Play($"LightAttack_00{attack_num}");
 
     }
 
@@ -28,7 +26,7 @@ public class Attack : MonoBehaviour
     public void ResetAttackNum()
     {
         attack_num = 1;
-        Invoke("Hit", _characteristics.AttackCd);
+        Invoke("Hit", characteristics.AttackCd);
     }
 
     public void IncAttack()

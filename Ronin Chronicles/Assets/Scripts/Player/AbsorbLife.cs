@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AbsorbLife : MonoBehaviour
@@ -27,10 +28,10 @@ public class AbsorbLife : MonoBehaviour
 
         cnt_old = GameObject.FindGameObjectsWithTag("Enemy").Count();
         _at = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Attack>();
+
     }
     void Update()
     {
-
         if (Input.GetKeyUp(KeyCode.Q) && cooldown)
         {
             cooldown = !cooldown;
@@ -39,6 +40,7 @@ public class AbsorbLife : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.Q))
             absorb = false;
+              
 
         if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0)
         {
@@ -63,10 +65,10 @@ public class AbsorbLife : MonoBehaviour
 
                 if (!enemy_ch.IsDead && player.HP < player.MaxHP)
                 {
+                    anim.SetBool("Absorb", true);
+                    anim.Play("Absorb");
                     (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
-                    anim.Play("StealHealth");
                 }
-
             }
         }
     }
