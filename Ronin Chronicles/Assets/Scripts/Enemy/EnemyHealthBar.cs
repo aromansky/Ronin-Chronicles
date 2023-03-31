@@ -18,8 +18,8 @@ public class EnemyHealthBar : MonoBehaviour
     void Update()
     {
         Bar.fillAmount = _characteristics.HP / _characteristics.MaxHP;
-        Vector3 direction = (_characteristics.target.transform.position - _canvas.transform.position).normalized;
+        Vector3 direction = (GameObject.FindGameObjectsWithTag("MainCamera")[0].transform.position - _canvas.transform.position).normalized;
         Quaternion LookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        _canvas.transform.rotation = Quaternion.Lerp(_canvas.transform.rotation, LookRotation, (float)0.1);
+        _canvas.transform.rotation = LookRotation;
     }
 }
