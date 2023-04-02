@@ -23,6 +23,9 @@ public class PlayerCharacteristics : MonoBehaviour
     [Tooltip("Run speed (m/s)")]
     public float runSpeed = 7f;
 
+    [Tooltip("Movement acceleration (m/s^2)")]
+    public float acceleration = 2f;
+
     [Tooltip("Gravity acceleration (m/s^2)")]
     public float gravity = 9.8f;
 
