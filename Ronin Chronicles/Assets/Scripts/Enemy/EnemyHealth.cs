@@ -1,10 +1,12 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class EnemyHealth : MonoBehaviour
 {
     private EnemyCharacteristics _characteristics;
     private float damage;
+    private CharacterController controller;
     
     private Attack _at;
 
@@ -12,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _characteristics = GetComponent<EnemyCharacteristics>();
         damage = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<PlayerCharacteristics>().KatanaDamage;
+        
 
         _at = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Attack>();
     }
@@ -27,6 +30,6 @@ public class EnemyHealth : MonoBehaviour
     public void DisableColliderAndUseGravity()
     {
         GetComponent<Collider>().enabled = false;
-        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<CharacterController>().enabled = false;
     }
 }
