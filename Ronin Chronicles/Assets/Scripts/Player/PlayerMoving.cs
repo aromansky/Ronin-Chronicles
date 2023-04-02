@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMoving : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class PlayerMoving : MonoBehaviour
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement);
             _charController.Move(movement);
-            
+
             // TODO 1: Заменить волшебное число 0.1f на какую-нибудь переменную "отклонение скорости" или типа того
             // TODO 2: Инерцию персонажа. То есть от ходьбы к бегу скорость меняется за несколько тактов и наоборот.
             if ((Mathf.Abs(deltaX) < 0.1f) && (Mathf.Abs(deltaZ) < 0.1f))

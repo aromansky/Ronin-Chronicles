@@ -2,6 +2,7 @@ using Cinemachine.Utility;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMoving : MonoBehaviour
 {
@@ -29,12 +30,16 @@ public class EnemyMoving : MonoBehaviour
             transform.position = Vector3.MoveTowards(character.position, target.position, Time.deltaTime * speed);
             _animator.Play("Walk");
         }
-        if (Vector3.Distance(target.position, character.position) < targetDistance - eps)
+
+        var dist = Vector3.Distance(target.position, character.position);
+        if (dist < targetDistance - eps || dist > targetDistance + eps)
         {
-            
-            float angle = target.eulerAngles.y * (float) Math.PI/180;
-            Vector3 backStep = new Vector3(target.position.x + targetDistance * (float)Math.Sin(angle), 0f, target.position.z + targetDistance * (float)Math.Cos(angle));
+
+            float angle = target.eulerAngles.y * (float)Math.PI / 180;
+            Vector3 backStep = new Vector3(target.position.x + targetDistance * (float)Math.Sin(angle), -10f, target.position.z + targetDistance * (float)Math.Cos(angle));
+
             transform.position = Vector3.MoveTowards(character.position, backStep, Time.deltaTime * speed);
+
             if (backStep.magnitude < eps)
                 _animator.Play("Idle");
             else
@@ -64,8 +69,8 @@ public class EnemyMoving : MonoBehaviour
     {
         if(!_characteristics.IsDead)
             if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= visionLength)
-                Moving(gameObject.transform, target.transform);
-            else
-                _animator.Play("Idle");
+            Moving(gameObject.transform, target.transform);
+        else
+            _animator.Play("Idle");
     }
 }
