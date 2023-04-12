@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !hit && characteristics.HP > 0 && !anim.GetBool("Absorb"))
+        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0) && !hit && characteristics.HP > 0 && !anim.GetBool("Absorb"))
             anim.Play($"LightAttack_00{attack_num}");
 
     }
@@ -36,7 +36,4 @@ public class Attack : MonoBehaviour
         else
             attack_num = 1;
     }
-
-
-
 }
