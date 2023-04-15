@@ -30,7 +30,7 @@ public class MouseLookPlayer : MonoBehaviour
 
     void Update()
     {
-        if (_characteristics.HP > 0)
+        if (!PauseMenu.GameIsPaused && _characteristics.HP > 0)
         {
             if (axes == RotationAxes.MouseX)
             {

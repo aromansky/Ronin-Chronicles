@@ -32,7 +32,7 @@ public class PlayerMoving : MonoBehaviour
 
     void Update()
     {
-        if (_characteristics.HP > 0 && !_animator.GetBool("Absorb"))
+        if (!PauseMenu.GameIsPaused && _characteristics.HP > 0 && !_animator.GetBool("Absorb"))
         {
             float deltaX = Input.GetAxis("Horizontal");
             float deltaZ = Input.GetAxis("Vertical");
@@ -64,6 +64,5 @@ public class PlayerMoving : MonoBehaviour
 
             _animator.SetFloat("Speed", currentSpeed);
         }
-
     }
 }

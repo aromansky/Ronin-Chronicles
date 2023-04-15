@@ -32,42 +32,45 @@ public class AbsorbLife : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Q) && cooldown)
+        if (!PauseMenu.GameIsPaused)
         {
-            cooldown = !cooldown;
-            Invoke("SetCoolDown", player.AbsorbLifeCd);
-        }
-
-        if (!Input.GetKey(KeyCode.Q))
-            absorb = false;
-              
-
-        if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0)
-        {
-            GameObject enemy = NearestEnemy();
-            EnemyCharacteristics enemy_ch = enemy.GetComponent<EnemyCharacteristics>();
-
-            var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
-
-            if (cnt_new != cnt_old && !Input.GetKey(KeyCode.Q))
-                cnt_old = cnt_new;
-
-            if (rect.Contains(cam.WorldToScreenPoint(enemy.transform.position)) &&
-            Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range &&
-            Input.GetKey(KeyCode.Q) && !enemy_ch.IsDead && !_at.hit)
+            if (Input.GetKeyUp(KeyCode.Q) && cooldown)
             {
-                if (cnt_new != cnt_old)
-                {
-                    (cooldown, cnt_old) = (!cooldown, cnt_new);
-                    Invoke("SetCoolDown", player.AbsorbLifeCd);
-                };
+                cooldown = !cooldown;
+                Invoke("SetCoolDown", player.AbsorbLifeCd);
+            }
+
+            if (!Input.GetKey(KeyCode.Q))
+                absorb = false;
 
 
-                if (!enemy_ch.IsDead && player.HP < player.MaxHP)
+            if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0)
+            {
+                GameObject enemy = NearestEnemy();
+                EnemyCharacteristics enemy_ch = enemy.GetComponent<EnemyCharacteristics>();
+
+                var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
+
+                if (cnt_new != cnt_old && !Input.GetKey(KeyCode.Q))
+                    cnt_old = cnt_new;
+
+                if (rect.Contains(cam.WorldToScreenPoint(enemy.transform.position)) &&
+                Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range &&
+                Input.GetKey(KeyCode.Q) && !enemy_ch.IsDead && !_at.hit)
                 {
-                    anim.SetBool("Absorb", true);
-                    anim.Play("Absorb");
-                    (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
+                    if (cnt_new != cnt_old)
+                    {
+                        (cooldown, cnt_old) = (!cooldown, cnt_new);
+                        Invoke("SetCoolDown", player.AbsorbLifeCd);
+                    };
+
+
+                    if (!enemy_ch.IsDead && player.HP < player.MaxHP)
+                    {
+                        anim.SetBool("Absorb", true);
+                        anim.Play("Absorb");
+                        (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
+                    }
                 }
             }
         }
