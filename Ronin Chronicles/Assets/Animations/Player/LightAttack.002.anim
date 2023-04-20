@@ -15429,6 +15429,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.2
+    functionName: SwordSound_play
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 11b4cba30e5850144967ee87997eac71,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.25
     functionName: IncAttack
     data: 
