@@ -17,23 +17,23 @@ public class PlayerCharacteristics : MonoBehaviour
 
 
     [Header("----- Movement -----")]
-    [Tooltip("Walk speed (m/s)")]
+    [Tooltip("Скорость ходьбы (m/s)")]
     public float moveSpeed = 2.25f;
 
-    [Tooltip("Run speed (m/s)")]
+    [Tooltip("Скорость бега (m/s)")]
     public float runSpeed = 7f;
 
-    [Tooltip("Movement acceleration (m/s^2)")]
-    public float acceleration = 2f;
+    [Tooltip("Ускорение/торможение движения (хз, какая размерность)")]
+    public float acceleration = 300f;
 
-    [Tooltip("Gravity acceleration (m/s^2)")]
+    [Tooltip("Графитация (m/s^2)")]
     public float gravity = 9.8f;
 
 
     [Header("----- HP -----")]
-    [Tooltip("Current amount of health points")]
+    [Tooltip("Текщие очки здоровья")]
     public float HP = 100f;
 
-    [Tooltip("Maximum amount of health points")]
+    [Tooltip("Максимум очков здоровья")]
     public float MaxHP = 100f;
 }
