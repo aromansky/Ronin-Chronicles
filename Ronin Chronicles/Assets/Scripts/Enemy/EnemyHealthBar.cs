@@ -10,6 +10,7 @@ public class EnemyHealthBar : MonoBehaviour
     
     private EnemyCharacteristics _characteristics;
     public Canvas _canvas;
+
     void Start()
     {
         _characteristics = GetComponent<EnemyCharacteristics>();
