@@ -8,7 +8,7 @@ public class AbsorbLife : MonoBehaviour
 {
     // ѕоглощение здоровь€ работает в зависимости от здоровь€ игрока, т.е, если показатель здоровь€ максимален, то игрок не может испоьзовать способность. ѕомимо этого, игрок не может использовать способность, если в поле зрени€ нет врагов.
 
-    private float vievAngle = 75f; // ”гол пол€ зрени€. Ёксперементальным путЄм вы€снено, что это оптимальный угол дл€ адекватной работы способности.
+    private float vievAngle = 65f; // ”гол пол€ зрени€. Ёксперементальным путЄм вы€снено, что это оптимальный угол дл€ адекватной работы способности.
 
     private Rect rect;
     private Camera cam;
@@ -88,12 +88,18 @@ public class AbsorbLife : MonoBehaviour
     {
         var minDist = float.MaxValue;
         var pl_pos = GameObject.FindGameObjectsWithTag("mainHero").First().transform.position;
+        pl_pos.y += 1.5f;
         GameObject res = null;
-        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy").Where(y => rect.Contains(cam.WorldToScreenPoint(y.transform.position))).Where(y => !Physics.Linecast(y.transform.position, pl_pos)))
+        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy").Where(y => rect.Contains(cam.WorldToScreenPoint(y.transform.position))))
         {
-            float dist = Vector3.Distance(x.transform.position, pl_pos);
-            if (dist < minDist && Vector3.Angle(GameObject.FindGameObjectsWithTag("mainHero").First().transform.forward, x.transform.position - pl_pos) < vievAngle)
-                (minDist, res) = (dist, x);
+            var en_pos = x.transform.position;
+            en_pos.y += 1.5f;
+            if (!Physics.Linecast(en_pos, pl_pos))
+            {
+                float dist = Vector3.Distance(x.transform.position, pl_pos);
+                if (dist < minDist && Vector3.Angle(GameObject.FindGameObjectsWithTag("mainHero").First().transform.forward, x.transform.position - pl_pos) < vievAngle)
+                    (minDist, res) = (dist, x);
+            }
         }
 
         //Debug.DrawLine(res.transform.position, pl_pos, Color.green); // ”далить, когда убедимc€ в корректной работе способности
