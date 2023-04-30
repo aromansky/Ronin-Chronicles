@@ -13,7 +13,6 @@ public class PlayerCharacteristics : MonoBehaviour
 
     [Header("----- Common attacks -----")]
     public float KatanaDamage;
-    public float AttackCd;
 
 
     [Header("----- Movement -----")]
