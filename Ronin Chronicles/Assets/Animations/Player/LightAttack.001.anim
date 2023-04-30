@@ -9726,6 +9726,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.016666668
+    functionName: SetTrail_set
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: fe85da204a9acdb4490122df91f6551c,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.033333335
     functionName: SwordSound_play
     data: 
@@ -9738,6 +9746,14 @@ AnimationClip:
     functionName: IncAttack
     data: 
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.4
+    functionName: SetTrail_remove
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: fe85da204a9acdb4490122df91f6551c,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
