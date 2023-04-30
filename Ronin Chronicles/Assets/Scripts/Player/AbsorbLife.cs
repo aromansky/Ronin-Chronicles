@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class AbsorbLife : MonoBehaviour
 {
@@ -37,7 +38,8 @@ public class AbsorbLife : MonoBehaviour
         if (!PauseMenu.GameIsPaused)
         {
             ab_benefit = false;
-            if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0 && player.HP != player.MaxHP)
+            absorb = false;
+            if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0 && player.MaxHP > player.HP)
             {
                 GameObject enemy = NearestEnemy();
 

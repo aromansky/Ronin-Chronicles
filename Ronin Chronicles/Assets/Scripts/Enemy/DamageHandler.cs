@@ -13,7 +13,7 @@ public class DamageHandler : MonoBehaviour
     private AudioSource audioSource;
     private Attack _at;
     private Animator _anim;
-    private bool damaged = false;
+    public bool damaged = false;
 
     private void Start()
     {
@@ -27,15 +27,13 @@ public class DamageHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        damaged = _at.notAt;
         if (collider.gameObject.tag == "Katana" && _at.hit && _characteristics.HP > 0 && !damaged)
         {
             _characteristics.HP -= damage;
             _anim.Play("Hit Enemy");
             audioSource.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length)]);
-            damaged = true;
         }
-        else
-            damaged = false;
     }
 
     public void DisableColliderAndUseGravity()
