@@ -31955,7 +31955,23 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.7
+    functionName: StepSound_play
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: fb38166bb75eacd41ade1a86719df841,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.0833334
+    functionName: StepSound_play
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: fb38166bb75eacd41ade1a86719df841,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4333333
     functionName: StepSound_play
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: fb38166bb75eacd41ade1a86719df841,
