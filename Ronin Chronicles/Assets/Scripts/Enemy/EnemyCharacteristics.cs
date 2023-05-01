@@ -11,6 +11,9 @@ public class EnemyCharacteristics : MonoBehaviour
     [Tooltip("Run speed (m/s)")]
     public float runSpeed = 6.5f;
 
+    [Tooltip("If distance between enemy and target equal or greater than runDistance (m), then enemy will run")]
+    public float runDistance = 500f;
+
     [Tooltip("Movement acceleration (m/s^2)")]
     public float acceleration = 2f;
 
