@@ -7,7 +7,6 @@ TagManager:
   - CinemachineTarget
   - Katana
   - mainHero
-  - Enemy
   layers:
   - Default
   - TransparentFX

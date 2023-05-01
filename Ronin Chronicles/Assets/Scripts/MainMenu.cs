@@ -7,8 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void LoadLevel()
     {
-        SceneManager.LoadScene("Main Scene");
-        Cursor.lockState = CursorLockMode.Locked;
+        SceneManager.LoadScene("TestScene");
     }
 
     public void ExitGame()
