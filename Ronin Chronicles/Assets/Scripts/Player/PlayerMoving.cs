@@ -16,6 +16,7 @@ public class PlayerMoving : MonoBehaviour
     private PlayerCharacteristics _characteristics;
     private CharacterController _charController;
     private Animator _animator;
+    private Parry _pr;
 
     private void Start()
     {
@@ -26,13 +27,14 @@ public class PlayerMoving : MonoBehaviour
         _characteristics = GetComponent<PlayerCharacteristics>();
         _charController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _pr = GetComponent<Parry>();
 
         gravity *= gravity < 0 ? 1 : -1;
     }
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused && _characteristics.HP > 0 && !_animator.GetBool("Absorb"))
+        if (!PauseMenu.GameIsPaused && _characteristics.HP > 0 && !_animator.GetBool("Absorb") && !_pr.block)
         {
             float deltaX = Input.GetAxis("Horizontal");
             float deltaZ = Input.GetAxis("Vertical");

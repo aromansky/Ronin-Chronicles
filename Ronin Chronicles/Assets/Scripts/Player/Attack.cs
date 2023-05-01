@@ -8,7 +8,6 @@ public class Attack : MonoBehaviour
     private Parry pr;
 
     public bool hit = false;
-    public bool notAt = true;
     public int attack_num = 1;
 
 
@@ -21,7 +20,7 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0) && !hit && characteristics.HP > 0 && !anim.GetBool("Absorb") && !anim.GetBool("Parry"))
+        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0) && !hit && characteristics.HP > 0 && !anim.GetBool("Absorb") && !pr.block)
             anim.Play($"LightAttack_00{attack_num}");
     }
 
@@ -31,7 +30,7 @@ public class Attack : MonoBehaviour
 
     public void IncAttack()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             attack_num = (attack_num == 3) ? 1 : ++attack_num;
             Invoke("CheckClick", 4); // Возможно, надо будет подобрать число лучше
@@ -40,7 +39,4 @@ public class Attack : MonoBehaviour
         else
             attack_num = 1;
     }
-
-    public void EndAttack() => notAt = true;
-    public void StartAttack() => notAt = false;
 }

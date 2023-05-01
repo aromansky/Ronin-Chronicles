@@ -18,15 +18,13 @@ public class Parry : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButton(1))
-        {
             anim.Play("Parry");
-        }
     }
 
     public void Block()
     {
-        at.hit = false;
         at.attack_num = 1;
         block = !block;
+        at.hit = false;
     }
 }

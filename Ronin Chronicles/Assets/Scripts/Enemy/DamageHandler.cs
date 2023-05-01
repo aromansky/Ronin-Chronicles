@@ -19,7 +19,7 @@ public class DamageHandler : MonoBehaviour
     {
         _characteristics = GetComponent<EnemyCharacteristics>();
         damage = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<PlayerCharacteristics>().KatanaDamage;
-        
+
         _anim = GetComponent<Animator>();
         _at = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Attack>();
         audioSource = GetComponent<AudioSource>();
@@ -27,7 +27,6 @@ public class DamageHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        damaged = _at.notAt;
         if (collider.gameObject.tag == "Katana" && _at.hit && _characteristics.HP > 0 && !damaged)
         {
             _characteristics.HP -= damage;
@@ -41,4 +40,6 @@ public class DamageHandler : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         GetComponent<CharacterController>().enabled = false;
     }
+
+    public void Damage() => damaged = !damaged;
 }
