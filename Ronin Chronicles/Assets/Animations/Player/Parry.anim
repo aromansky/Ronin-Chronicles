@@ -31146,6 +31146,20 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: SetTrail_remove
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.8333333
+    functionName: EndBlock
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.8666667
     functionName: Block
     data: 
