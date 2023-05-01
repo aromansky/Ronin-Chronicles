@@ -27,15 +27,15 @@ public class Parry : MonoBehaviour
 
     public void Block()
     {
+        anim.SetBool("Attack_1", false);
         at.attack_num = 1;
         block = !block;
-        at.hit = false;
     }
 
     public void EndBlock()
     {
-        coolDown = true;
         anim.SetBool("Attack_1", false);
+        coolDown = true;
         Invoke("Cd", characteristics.BlockCd);
     }
 
