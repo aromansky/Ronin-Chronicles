@@ -20,11 +20,15 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0) && !hit && characteristics.HP > 0 && !anim.GetBool("Absorb") && !pr.block)
+        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0) && !anim.GetBool("Attack_1") && characteristics.HP > 0 && !anim.GetBool("Absorb") && !pr.block && !pr.coolDown)
             anim.Play($"LightAttack_00{attack_num}");
     }
 
-    public void Hit() => hit = !hit;
+    public void Hit()
+    {
+        hit = !hit;
+        anim.SetBool("Attack_1", hit);
+    }
 
     void CheckClick() => attack_num = !hit ? 1 : attack_num;
 
@@ -33,9 +37,8 @@ public class Attack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             attack_num = (attack_num == 3) ? 1 : ++attack_num;
-            Invoke("CheckClick", 4); // Возможно, надо будет подобрать число лучше
+            Invoke("CheckClick", 1); // Возможно, надо будет подобрать число лучше
         }
-
         else
             attack_num = 1;
     }

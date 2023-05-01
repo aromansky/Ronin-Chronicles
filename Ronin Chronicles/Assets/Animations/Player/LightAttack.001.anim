@@ -9726,6 +9726,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: IncAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.016666668
     functionName: SetTrail_set
     data: 
@@ -9739,13 +9746,6 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 11b4cba30e5850144967ee87997eac71,
       type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.06666667
-    functionName: IncAttack
-    data: 
-    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
