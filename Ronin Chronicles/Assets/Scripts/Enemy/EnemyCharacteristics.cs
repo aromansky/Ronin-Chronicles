@@ -32,6 +32,14 @@ public class EnemyCharacteristics : MonoBehaviour
     public GameObject target;
 
 
+    [Header("----- Combat -----")]
+    [Tooltip("Amount hp that enemy takes away from player")]
+    public float damage = 10f;
+
+    [Tooltip("Time between attacks")]
+    public float attackCd = 2f;
+
+
     [Header("----- HP -----")]
     public float HP;
     public float MaxHP;
