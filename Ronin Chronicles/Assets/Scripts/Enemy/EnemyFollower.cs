@@ -40,6 +40,7 @@ public class EnemyFollower : MonoBehaviour
     /// <param name="distance">Какое расстояние держать до объекта</param>
     public void WalkToTarget(GameObject target, float distance)
     {
+        _navMesh.isStopped = false;
         Vector3 targetPos = target.transform.position;
 
         // Update Characteristics
@@ -62,6 +63,7 @@ public class EnemyFollower : MonoBehaviour
     /// <param name="distance">Какое расстояние держать до объекта</param>
     public void RunToTarget(GameObject target, float distance)
     {
+        _navMesh.isStopped = false;
         Vector3 targetPos = target.transform.position;
 
         // Update Characteristics
