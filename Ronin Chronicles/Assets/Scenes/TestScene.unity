@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,6 +136,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1037231107, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.7804376
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037231107, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.90360016
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037231107, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.00015259
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037231107, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.000053406
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037231107, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037231107, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383645593003630390, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4742587353292058460, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8,
         type: 3}
       propertyPath: m_RootOrder
@@ -196,7 +225,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Samurai
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3383645593003630390, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8582dd8f19a412f4cb6c5eb0b93cd2d8, type: 3}
 --- !u!4 &308718641 stripped
 Transform:
