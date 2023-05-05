@@ -676,6 +676,20 @@ MonoBehaviour:
   isAttacking: 0
   attack_num: 0
   IsAttackCd: 0
+--- !u!114 &956588755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956588716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b4cba30e5850144967ee87997eac71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordSounds:
+  - {fileID: 8300000, guid: 541e277918dcb5f48b6321b18ee54418, type: 3}
 --- !u!1 &1042032821
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +851,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4c84b931fd7cb4abc2aed5a3ee4311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSounds:
+  - {fileID: 8300000, guid: 95c311d0457746945bb60f5bb5f0eae3, type: 3}
+  - {fileID: 8300000, guid: a70df243e91ad3948a57f91eac4fe667, type: 3}
+  - {fileID: 8300000, guid: 0e75ce5f2353afe49af82c6a246f6e6b, type: 3}
+  - {fileID: 8300000, guid: a0acf6a89aacf044d86b871f53e93efa, type: 3}
 --- !u!1001 &1744232866
 PrefabInstance:
   m_ObjectHideFlags: 0

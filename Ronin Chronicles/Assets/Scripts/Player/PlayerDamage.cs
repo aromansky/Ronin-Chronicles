@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
+    public AudioClip[] hitSounds;
+
     private PlayerCharacteristics characteristics;
     private Parry pr;
+    private AudioSource audioSource;
 
     private void Start()
     {
         characteristics = GetComponent<PlayerCharacteristics>();
         pr = GetComponent<Parry>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -18,11 +22,14 @@ public class PlayerDamage : MonoBehaviour
     {
         GameObject enemy = collider.transform.root.gameObject;
 
-        if (enemy.CompareTag("Enemy"))
-        {
-            float damage = enemy.GetComponent<EnemyCharacteristics>().damage;
+        if (!enemy.CompareTag("Enemy")) return;
 
-            characteristics.HP -= !pr.block ? damage : 0; // следует потестить
-        }
+        if (pr.block) return;
+
+
+        float damage = enemy.GetComponent<EnemyCharacteristics>().damage;
+
+        characteristics.HP -= damage;
+        audioSource.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length)]);
     }
 }
