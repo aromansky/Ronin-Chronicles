@@ -50,5 +50,6 @@ public class AttackManager : MonoBehaviour
     {
         isAttacking = !isAttacking;
         _katanaCollider.isTrigger = !_katanaCollider.isTrigger;
+        _animator.SetBool("IsAttacking", !_animator.GetBool("IsAttacking"));
     }
 }

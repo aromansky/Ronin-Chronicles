@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyCharacteristics _characteristics;
     private EnemyFollower follower;
     private AttackManager _attackManager;
+    private DamageHandler _damageHandler;
 
     private GameObject target;
     private float runDistance;
@@ -21,6 +22,7 @@ public class EnemyAI : MonoBehaviour
         _characteristics = GetComponent<EnemyCharacteristics>();
         follower = GetComponent<EnemyFollower>();
         _attackManager = GetComponent<AttackManager>();
+        _damageHandler = GetComponent<DamageHandler>();
 
         target = _characteristics.target;
         runDistance = _characteristics.runDistance;
@@ -55,6 +57,10 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackLogic()
     {
+        if (_characteristics.IsDead) return;
+
+        if (_damageHandler.damaged) return;
+
         if (distanceToPlayer < targetDistance)
         {
             _attackManager.Attack();
