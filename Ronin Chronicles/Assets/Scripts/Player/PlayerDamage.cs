@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerDamage : MonoBehaviour
 {
     private PlayerCharacteristics characteristics;
-
+    private Parry pr;
 
     private void Start()
     {
         characteristics = GetComponent<PlayerCharacteristics>();
+        pr = GetComponent<Parry>();
     }
 
 
@@ -21,7 +22,7 @@ public class PlayerDamage : MonoBehaviour
         {
             float damage = enemy.GetComponent<EnemyCharacteristics>().damage;
 
-            characteristics.HP -= damage;
+            characteristics.HP -= !pr.block ? damage : 0; // следует потестить
         }
     }
 }
