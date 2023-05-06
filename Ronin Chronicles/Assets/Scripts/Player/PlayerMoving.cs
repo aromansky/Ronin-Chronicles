@@ -34,7 +34,7 @@ public class PlayerMoving : MonoBehaviour
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused && _characteristics.HP > 0 && !_animator.GetBool("Absorb") && !_pr.block)
+        if (!PauseMenu.GameIsPaused && !DeathScreen.GameOver && _characteristics.HP > 0 && !_animator.GetBool("Absorb") && !_pr.block)
         {
             float deltaX = Input.GetAxis("Horizontal");
             float deltaZ = Input.GetAxis("Vertical");

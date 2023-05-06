@@ -21,7 +21,7 @@ public class Parry : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(1) && !coolDown && !block)
+        if (!PauseMenu.GameIsPaused && !DeathScreen.GameOver && Input.GetMouseButton(1) && !coolDown && !block)
             anim.Play("Parry");
     }
 

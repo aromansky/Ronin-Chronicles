@@ -23,7 +23,7 @@ public class Attack : MonoBehaviour
         hit = anim.GetBool("Attack_1");
         if (hit != anim.GetBool("Attack_1"))
             Debug.Log($"{hit} - {anim.GetBool("Attack_1")}");   
-        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0) && !anim.GetBool("Attack_1") && characteristics.HP > 0 && !anim.GetBool("Absorb") && !pr.block && !pr.coolDown)
+        if (!PauseMenu.GameIsPaused && !DeathScreen.GameOver && Input.GetMouseButtonDown(0) && !anim.GetBool("Attack_1") && characteristics.HP > 0 && !anim.GetBool("Absorb") && !pr.block && !pr.coolDown)
             anim.Play($"LightAttack_00{attack_num}");
     }
 

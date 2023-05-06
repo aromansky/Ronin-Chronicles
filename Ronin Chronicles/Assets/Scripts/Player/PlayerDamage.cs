@@ -31,6 +31,9 @@ public class PlayerDamage : MonoBehaviour
         float damage = enemy.GetComponent<EnemyCharacteristics>().damage;
 
         characteristics.HP -= damage;
+
+        if (characteristics.HP < 0) characteristics.HP = 0;
+
         audioSource.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length)]);
     }
 }
