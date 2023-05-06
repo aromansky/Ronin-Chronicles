@@ -39,7 +39,7 @@ public class Attack : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            attack_num = (attack_num == 3) ? 1 : ++attack_num;
+            attack_num = attack_num % 3 + 1;
             Invoke("CheckClick", 1); // Возможно, надо будет подобрать число лучше
         }
         else
