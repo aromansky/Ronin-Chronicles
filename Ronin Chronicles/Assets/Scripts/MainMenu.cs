@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,8 +13,8 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         canvas1 = GameObject.Find("Main").GetComponent<Canvas>();
-        canvas2 = GameObject.Find("Help").GetComponent<Canvas>();
-        canvas2.enabled = true;
+        canvas2 = GameObject.Find("HelpCan").GetComponent<Canvas>();
+        canvas2.enabled = false;
     }
 
     public void LoadLevel()
@@ -28,9 +29,14 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Help() =>
+    public void Help()
+    {
         (canvas1.enabled, canvas2.enabled) = (false, true);
+    }
 
-    public void Back() =>
+    public void Back()
+    {
         (canvas1.enabled, canvas2.enabled) = (true, false);
+    }
+
 }
