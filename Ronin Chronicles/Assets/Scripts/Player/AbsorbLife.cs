@@ -46,40 +46,43 @@ public class AbsorbLife : MonoBehaviour
                 if (enemy != null)
                 {
                     ab_benefit = true;
-                    if (Input.GetKeyUp(KeyCode.Q) && cooldown)
-                    {
-                        cooldown = !cooldown;
-                        Invoke("SetCoolDown", player.AbsorbLifeCd);
-                    }
 
-                    if (!Input.GetKey(KeyCode.Q))
+                    if (!anim.GetBool("Absorb"))
                         absorb = false;
 
                     EnemyCharacteristics enemy_ch = enemy.GetComponent<EnemyCharacteristics>();
 
                     var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
 
-                    if (cnt_new != cnt_old && !Input.GetKey(KeyCode.Q))
+                    if (cnt_new != cnt_old && !anim.GetBool("Absorb"))
                         cnt_old = cnt_new;
 
-                    if (Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range && Input.GetKey(KeyCode.Q) && !enemy_ch.IsDead && !_at.hit)
+                    if (Input.GetKeyDown(KeyCode.Q))
                     {
+                        if (Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range && !enemy_ch.IsDead && !_at.hit && player.HP < player.MaxHP)
+                        {
+                            anim.Play("Absorb");
+                            anim.SetBool("Absorb", true);
+                        }
+                    }
+
+                    if (anim.GetBool("Absorb"))
+                    {
+                        (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
+                    }
+                        
+
+                    if (anim.GetBool("Absorb") && cnt_new != cnt_old)
                         if (cnt_new != cnt_old)
                         {
                             (cooldown, cnt_old) = (!cooldown, cnt_new);
+                            anim.SetBool("Absorb", false);
                             Invoke("SetCoolDown", player.AbsorbLifeCd);
                         };
 
 
-                        if (!enemy_ch.IsDead && player.HP < player.MaxHP)
-                        {
-                            anim.SetBool("Absorb", true);
-                            anim.Play("Absorb");
-                            (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
-                        }
-                    }
                 }
-                
+
             }
         }
     }
