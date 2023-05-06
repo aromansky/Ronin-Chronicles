@@ -11,11 +11,12 @@ public class PlayerMoving : MonoBehaviour
     private float moveSpeed;
     private float runSpeed;
     private float acceleration;
-    private const float speedError = 0.01f; // ����������� ��������, ��� eps, �� ������ ��� ��������.
+    private const float speedError = 0.05f; // ����������� ��������, ��� eps, �� ������ ��� ��������.
 
     private PlayerCharacteristics _characteristics;
     private CharacterController _charController;
     private Animator _animator;
+    private Parry _pr;
 
     private void Start()
     {
@@ -26,13 +27,14 @@ public class PlayerMoving : MonoBehaviour
         _characteristics = GetComponent<PlayerCharacteristics>();
         _charController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _pr = GetComponent<Parry>();
 
         gravity *= gravity < 0 ? 1 : -1;
     }
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused && _characteristics.HP > 0 && !_animator.GetBool("Absorb"))
+        if (!PauseMenu.GameIsPaused && !DeathScreen.GameOver && _characteristics.HP > 0 && !_animator.GetBool("Absorb") && !_pr.block)
         {
             float deltaX = Input.GetAxis("Horizontal");
             float deltaZ = Input.GetAxis("Vertical");
@@ -46,20 +48,41 @@ public class PlayerMoving : MonoBehaviour
             movement = transform.TransformDirection(movement);
             _charController.Move(movement);
 
+
+            // Основной расчёт скорости
             if ((Mathf.Abs(deltaX) < speedError) && (Mathf.Abs(deltaZ) < speedError))
             {
-                currentSpeed = 0;
+                currentSpeed = Mathf.Lerp(0, currentSpeed, 1 - acceleration * Time.deltaTime);
             }
             else
             {
-                if (Input.GetKey(KeyCode.LeftShift) && (deltaZ >= 0))
+                if (Input.GetKey(KeyCode.LeftShift) && (deltaZ >= 0f))
                 {
                     currentSpeed = Mathf.Lerp(currentSpeed, runSpeed, acceleration * Time.deltaTime);
+                }
+                else if (currentSpeed > moveSpeed)
+                {
+                    currentSpeed = Mathf.Lerp(moveSpeed, currentSpeed, 1 - acceleration * Time.deltaTime);
                 }
                 else
                 {
                     currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, acceleration * Time.deltaTime);
                 }
+            }
+
+
+            // "Подгоняю" скорость до ближайшей заданной
+            if ((currentSpeed < runSpeed) && (currentSpeed >= runSpeed - speedError))
+            {
+                currentSpeed = runSpeed;
+            }
+            else if ((currentSpeed >= moveSpeed - speedError) && (currentSpeed <= moveSpeed + speedError))
+            {
+                currentSpeed = moveSpeed;
+            }
+            else if ((currentSpeed > 0) && (currentSpeed <= speedError))
+            {
+                currentSpeed = 0f;
             }
 
             _animator.SetFloat("Speed", currentSpeed);

@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class AbsorbLife : MonoBehaviour
 {
-    // Поглощение жизни работает независимо от здоровья игрока. Однако, если показатель здоровья не максимален, то игрок может исцелиться.
-    // На данный момент поглощение жизни захватывает всех врагов в поле зрения игрока.
+    // Поглощение здоровья работает в зависимости от здоровья игрока, т.е, если показатель здоровья максимален, то игрок не может испоьзовать способность. Помимо этого, игрок не может использовать способность, если в поле зрения нет врагов.
+
+    private float vievAngle = 65f; // Угол поля зрения. Эксперементальным путём выяснено, что это оптимальный угол для адекватной работы способности.
 
     private Rect rect;
     private Camera cam;
     private PlayerCharacteristics player;
     private int cnt_old;
 
+    public bool ab_benefit; // взможность использования способности.
     public bool cooldown = true; // готовность способноти.
     public bool absorb;
     private Animator anim;
@@ -34,44 +37,52 @@ public class AbsorbLife : MonoBehaviour
     {
         if (!PauseMenu.GameIsPaused)
         {
-            if (Input.GetKeyUp(KeyCode.Q) && cooldown)
-            {
-                cooldown = !cooldown;
-                Invoke("SetCoolDown", player.AbsorbLifeCd);
-            }
-
-            if (!Input.GetKey(KeyCode.Q))
-                absorb = false;
-
-
-            if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0)
+            ab_benefit = false;
+            absorb = false;
+            if (cooldown && GameObject.FindGameObjectsWithTag("Enemy").Count() != 0 && player.MaxHP > player.HP)
             {
                 GameObject enemy = NearestEnemy();
-                EnemyCharacteristics enemy_ch = enemy.GetComponent<EnemyCharacteristics>();
 
-                var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
-
-                if (cnt_new != cnt_old && !Input.GetKey(KeyCode.Q))
-                    cnt_old = cnt_new;
-
-                if (rect.Contains(cam.WorldToScreenPoint(enemy.transform.position)) &&
-                Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range &&
-                Input.GetKey(KeyCode.Q) && !enemy_ch.IsDead && !_at.hit)
+                if (enemy != null)
                 {
-                    if (cnt_new != cnt_old)
-                    {
-                        (cooldown, cnt_old) = (!cooldown, cnt_new);
-                        Invoke("SetCoolDown", player.AbsorbLifeCd);
-                    };
+                    ab_benefit = true;
 
+                    if (!anim.GetBool("Absorb"))
+                        absorb = false;
 
-                    if (!enemy_ch.IsDead && player.HP < player.MaxHP)
+                    EnemyCharacteristics enemy_ch = enemy.GetComponent<EnemyCharacteristics>();
+
+                    var cnt_new = GameObject.FindGameObjectsWithTag("Enemy").Count();
+
+                    if (cnt_new != cnt_old && !anim.GetBool("Absorb"))
+                        cnt_old = cnt_new;
+
+                    if (Input.GetKeyDown(KeyCode.Q))
                     {
-                        anim.SetBool("Absorb", true);
-                        anim.Play("Absorb");
+                        if (Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position) < player.Range && !enemy_ch.IsDead && !_at.hit && player.HP < player.MaxHP)
+                        {
+                            anim.Play("Absorb");
+                            anim.SetBool("Absorb", true);
+                        }
+                    }
+
+                    if (anim.GetBool("Absorb"))
+                    {
                         (enemy_ch.HP, player.HP, absorb) = (enemy_ch.HP - player.AbsorbLifeDamage * Time.deltaTime, player.HP + player.AbsorbLifeDamage * player.AbsorbLifeCoeff * Time.deltaTime, true);
                     }
+                        
+
+                    if (anim.GetBool("Absorb") && cnt_new != cnt_old)
+                        if (cnt_new != cnt_old)
+                        {
+                            (cooldown, cnt_old) = (!cooldown, cnt_new);
+                            anim.SetBool("Absorb", false);
+                            Invoke("SetCoolDown", player.AbsorbLifeCd);
+                        };
+
+
                 }
+
             }
         }
     }
@@ -81,14 +92,23 @@ public class AbsorbLife : MonoBehaviour
     GameObject NearestEnemy()
     {
         var minDist = float.MaxValue;
+        var pl_pos = GameObject.FindGameObjectsWithTag("mainHero").First().transform.position;
+        pl_pos.y += 1.5f;
         GameObject res = null;
-        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (var x in GameObject.FindGameObjectsWithTag("Enemy").Where(y => rect.Contains(cam.WorldToScreenPoint(y.transform.position))))
         {
-            float dist = Vector3.Distance(x.transform.position, GameObject.FindGameObjectsWithTag("mainHero").First().transform.position);
-            if (dist < minDist)
-                (minDist, res) = (dist, x);
+            var en_pos = x.transform.position;
+            en_pos.y += 1.5f;
+            if (!Physics.Linecast(en_pos, pl_pos))
+            {
+                float dist = Vector3.Distance(x.transform.position, pl_pos);
+                if (dist < minDist && Vector3.Angle(GameObject.FindGameObjectsWithTag("mainHero").First().transform.forward, x.transform.position - pl_pos) < vievAngle)
+                    (minDist, res) = (dist, x);
+            }
         }
+
+        //Debug.DrawLine(res.transform.position, pl_pos, Color.green); // Удалить, когда убедимcя в корректной работе способности
+
         return res;
     }
 }
-

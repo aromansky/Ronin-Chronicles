@@ -20,13 +20,13 @@ public class AbsorbCd : MonoBehaviour
 
     public void SetCoolDown() => sc.cooldown = !sc.cooldown;
 
+    
 
     public void EndAbsorb()
     {
         anim.SetBool("Absorb", false);
         if (sc.absorb)
         {
-            
             SetCoolDown();
             Invoke("SetCoolDown", player.AbsorbLifeCd);
         }
