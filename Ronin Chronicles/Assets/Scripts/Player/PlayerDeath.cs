@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -16,8 +17,14 @@ public class PlayerDeath : MonoBehaviour
         if (_characteristics.HP <= 0)
         {
             _anim.SetBool("Dead", true);
+            Invoke("Death", 5);
         }
-            
+    }
 
+
+    void Death()
+    {
+        SceneManager.LoadScene("Death Menu");
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
