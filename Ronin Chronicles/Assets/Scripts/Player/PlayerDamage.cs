@@ -20,7 +20,8 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        GameObject enemy = collider.transform.root.gameObject;
+        // Бога больше нет
+        GameObject enemy = collider.transform.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent.gameObject;
 
         if (!enemy.CompareTag("Enemy")) return;
 

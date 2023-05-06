@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyFollower follower;
     private AttackManager _attackManager;
     private DamageHandler _damageHandler;
+    private Animator _animator;
 
     private GameObject target;
     private float runDistance;
@@ -24,6 +25,7 @@ public class EnemyAI : MonoBehaviour
         follower = GetComponent<EnemyFollower>();
         _attackManager = GetComponent<AttackManager>();
         _damageHandler = GetComponent<DamageHandler>();
+        _animator = GetComponent<Animator>();
 
         target = _characteristics.target;
         runDistance = _characteristics.runDistance;
@@ -35,6 +37,7 @@ public class EnemyAI : MonoBehaviour
         distanceToPlayer = (gameObject.transform.position - target.transform.position).magnitude;
         MovementLogic();
         AttackLogic();
+        _animator.speed = 1;
     }
 
     private void MovementLogic()
@@ -49,10 +52,12 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceToPlayer >= runDistance)
         {
+            _animator.speed = _characteristics.moveSpeed / 7;
             follower.RunToTarget(target, targetDistance);
         }
         else if ((distanceToPlayer < runDistance) && (distanceToPlayer >= targetDistance))
         {
+            _animator.speed = _characteristics.moveSpeed / 2.2f;
             follower.WalkToTarget(target, targetDistance);
         }
         else
@@ -71,6 +76,7 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceToPlayer < targetDistance)
         {
+            _animator.speed = 1;
             _attackManager.Attack();
         }
     }

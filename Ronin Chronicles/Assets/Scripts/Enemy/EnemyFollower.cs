@@ -8,8 +8,6 @@ using UnityEngine.TextCore.Text;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyFollower : MonoBehaviour
 { 
-    private const float distanceError = 0.1f;
-
     // Movement
     private float moveSpeed;
     private float runSpeed;

@@ -5221,10 +5221,10 @@ RectTransform:
   m_Father: {fileID: 5069847492986711533}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.76722926, y: 0.90360016}
+  m_AnchorMin: {x: 0.7804376, y: 0.90360016}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.000091553, y: 0.000053406}
+  m_SizeDelta: {x: -0.00015259, y: 0.000053406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1037231109
 CanvasRenderer:
@@ -17715,17 +17715,16 @@ GameObject:
   - component: {fileID: 532906384}
   - component: {fileID: 532906401}
   - component: {fileID: 532906418}
-  - component: {fileID: 1717899286}
   - component: {fileID: 1349000055590479849}
   - component: {fileID: 1730709777103972999}
   - component: {fileID: 4007668715477204163}
-  - component: {fileID: 3383645593003630390}
+  - component: {fileID: 1717899307}
   m_Layer: 6
   m_Name: Samurai
   m_TagString: mainHero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4742587353292058460
 Transform:
@@ -18101,20 +18100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: 0
   coolDown: 0
---- !u!114 &1717899286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5375854015387792870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd39e0d811e66b43a4a2bd46f800e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  block: 0
-  coolDown: 0
 --- !u!81 &1349000055590479849
 AudioListener:
   m_ObjectHideFlags: 0
@@ -18149,7 +18134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 825482144}
---- !u!114 &3383645593003630390
+--- !u!114 &1717899307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18158,11 +18143,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5375854015387792870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbd39e0d811e66b43a4a2bd46f800e48, type: 3}
+  m_Script: {fileID: 11500000, guid: cd4c84b931fd7cb4abc2aed5a3ee4311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: 0
-  coolDown: 0
+  hitSounds:
+  - {fileID: 8300000, guid: 95c311d0457746945bb60f5bb5f0eae3, type: 3}
+  - {fileID: 8300000, guid: a70df243e91ad3948a57f91eac4fe667, type: 3}
+  - {fileID: 8300000, guid: 0e75ce5f2353afe49af82c6a246f6e6b, type: 3}
+  - {fileID: 8300000, guid: a0acf6a89aacf044d86b871f53e93efa, type: 3}
 --- !u!1 &5382902198474350026
 GameObject:
   m_ObjectHideFlags: 0
