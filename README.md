@@ -37,5 +37,7 @@
   - Звуки меча (катаны): [ссылка 1](https://zvukipro.com/oryjie/1087-zvuki-mecha.html) и [ссылка 2](https://zvukipro.com/oryjie/925-zvuki-katany-samurajskij-mech.html)
   - Звуки ударов по броне: [ссылка 1](https://wav-library.net/zvuk-udara-mecha-po-shhitu-vers3-mp3) и [ссылка 2](https://wav-library.net/zvuk-udara-mecha-po-shhitu-mp3)
   - Звуки перемещения: [ссылка 1](https://zvukipro.com/zvukiludei/1167-zvuki-shagov-cheloveka-po-zemle.html) и [ссылка 2](https://zvukipro.com/zvukiludei/192-zvuki-padeniya-cheloveka.html)
+  - Фон в главном меню: [ссылка 1](https://kartinkin.net/pics/36522-krasno-chernyj-fon-minimalizm.html)
+  - Лого создала [Midjourney](https://www.midjourney.com/home/?callbackUrl=%2Fapp%2F)
   - [Прочее](https://zvukipro.com/audio/556-zvuki-magii.html)
 
