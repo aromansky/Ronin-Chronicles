@@ -12,12 +12,14 @@ public class AttackManager : MonoBehaviour
     private Animator _animator;
     private EnemyCharacteristics _characteristics;
     private BoxCollider _katanaCollider;
+    private DamageHandler _damageHandler;
 
 
     private void OnEnable()
     {
         _animator = GetComponent<Animator>();
         _characteristics = GetComponent<EnemyCharacteristics>();
+        _damageHandler = GetComponent<DamageHandler>();
         
         // Я не знаю, как это сделать нормально, поэтому будем как яндередев
         _katanaCollider = gameObject.transform.Find("Samurai").Find("LowerBody.001").Find("MiddleBody.001").Find("Chest.001").Find("UpperChest.001").Find("R.Shoulder.001").Find("R.Arm.001").Find("R.Forearm.001").Find("R.Hand.001").Find("Katana").Find("KatanaCollider").gameObject.GetComponent<BoxCollider>();
@@ -35,7 +37,7 @@ public class AttackManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (_characteristics.IsDead)
+        if (_characteristics.IsDead || _damageHandler.damaged)
         {
             _katanaCollider.enabled = false;
         }
@@ -48,6 +50,9 @@ public class AttackManager : MonoBehaviour
 
         if (isAttacking) return;
 
+        if (_damageHandler.damaged) return;
+
+        _katanaCollider.enabled = true;
         _animator.Play($"EnemyLightAttack_00{attack_num}");
         IsAttackCd = true;
 

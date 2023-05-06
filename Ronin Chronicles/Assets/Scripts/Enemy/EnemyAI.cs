@@ -74,6 +74,8 @@ public class EnemyAI : MonoBehaviour
 
         if (_damageHandler.damaged) return;
 
+        if (DeathScreen.GameOver) return;
+
         if (distanceToPlayer < targetDistance)
         {
             _animator.speed = 1;

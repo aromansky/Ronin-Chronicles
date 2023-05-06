@@ -23,6 +23,8 @@ public class DamageHandler : MonoBehaviour
         _anim = GetComponent<Animator>();
         _at = GameObject.FindGameObjectsWithTag("mainHero").First().GetComponent<Attack>();
         audioSource = GetComponent<AudioSource>();
+
+        damaged = false;
     }
 
     private void OnTriggerEnter(Collider collider)
