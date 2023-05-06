@@ -17823,11 +17823,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19314c13d4d4f7749a5450c9015ed034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 1000
+  Range: 100
   AbsorbLifeDamage: 20
   AbsorbLifeCoeff: 0.5
   AbsorbLifeCd: 5
-  KatanaDamage: 20
+  KatanaDamage: 15
   BlockCd: 0
   moveSpeed: 2
   runSpeed: 7

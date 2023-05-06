@@ -749,13 +749,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2.2
   runSpeed: 6.5
+  runDistance: 500
   acceleration: 2
   turningSpeed: 5
   targetDistance: 1
   visionLength: 9
   target: {fileID: 0}
-  HP: 1000
-  MaxHP: 1000
+  damage: 10
+  attackCd: 2
+  HP: 100
+  MaxHP: 100
   IsDead: 0
 --- !u!114 &3364070350254720775
 MonoBehaviour:
