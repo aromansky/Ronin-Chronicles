@@ -17827,7 +17827,7 @@ MonoBehaviour:
   AbsorbLifeCoeff: 0.5
   AbsorbLifeCd: 5
   KatanaDamage: 15
-  BlockCd: 0
+  BlockCd: 2
   moveSpeed: 2
   runSpeed: 7
   acceleration: 3
