@@ -29,6 +29,19 @@ public class AttackManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// „тобы не писать тот же ужас по нахождению _katanaCollider в скрипте смерти,
+    /// решил провер€ть смерть здесь. »наче игрок упираетс€ в катану трупа.
+    /// </summary>
+    private void Update()
+    {
+        if (_characteristics.IsDead)
+        {
+            _katanaCollider.enabled = false;
+        }
+    }
+
+
     public void Attack()
     {
         if (IsAttackCd) return;
@@ -36,9 +49,9 @@ public class AttackManager : MonoBehaviour
         if (isAttacking) return;
 
         _animator.Play($"EnemyLightAttack_00{attack_num}");
+        IsAttackCd = true;
 
         Invoke(nameof(HandleAttackCd), _characteristics.attackCd);
-
         attack_num = (attack_num % 3) + 1;
     }
 

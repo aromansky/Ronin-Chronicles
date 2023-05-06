@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -40,6 +41,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (_characteristics.IsDead) return;
 
+        if (distanceToPlayer > _characteristics.visionLength)
+        {
+            follower.StopMoving();
+            return;
+        }
+
         if (distanceToPlayer >= runDistance)
         {
             follower.RunToTarget(target, targetDistance);
@@ -51,6 +58,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             follower.StopMoving();
+            follower.TurnToTarget(target);
         }
     }
 
