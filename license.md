@@ -4,6 +4,7 @@
 - [Модель самурая](https://skfb.ly/6VUSJ)
 - Картинка способности поглощения здоровья вырезана [отсюда](https://starwars.fandom.com/ru/wiki/%D0%92%D1%8B%D1%81%D0%B0%D1%81%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A1%D0%B8%D0%BB%D1%8B?file=%25D0%2592%25D1%258B%25D1%2581%25D0%25B0%25D1%2581%25D1%258B%25D0%25B2%25D0%25B0%25D0%25BD%25D0%25B8%25D0%25B5.jpg)
 - Фон в главном меню [отсюда](https://kartinkin.net/pics/36522-krasno-chernyj-fon-minimalizm.html)
+- [Фон в меню управления](https://w7.pngwing.com/pngs/362/328/png-transparent-brown-scroll-illustration-scroll-old-paper-s-template-image-file-formats-presentation-thumbnail.png)
 - Лого создала [Midjourney](https://www.midjourney.com/home/?callbackUrl=%2Fapp%2F)
 - Префабы земли, деревьев, растительности и т.д. для карты взяты из [этого набора](https://assetstore.unity.com/packages/3d/environments/low-poly-free-vegetation-kit-176906)
 - Звуки:
