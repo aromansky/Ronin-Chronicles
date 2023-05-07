@@ -10,10 +10,12 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject interfaceUI;
+    public GameObject infoUI;
 
     void Start()
     {
         pauseMenuUI.SetActive(false);
+        infoUI.SetActive(false);
         interfaceUI.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
@@ -38,15 +40,25 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        infoUI.SetActive(false);
         interfaceUI.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
+
+    public void Info()
+    {
+        pauseMenuUI.SetActive(false);
+        infoUI.SetActive(true);
+    }
+
+
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
+        infoUI.SetActive(false);
         interfaceUI.SetActive(false);
         Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = 0f;
@@ -64,5 +76,12 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Игра закрылась");
         Application.Quit();
+    }
+
+
+    public void Back()
+    {
+        pauseMenuUI.SetActive(true);
+        infoUI.SetActive(false);
     }
 }
